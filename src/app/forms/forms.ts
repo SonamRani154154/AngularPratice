@@ -16,4 +16,10 @@ password = new FormControl('123');
 displayValue(){
   console.log(this.name.value, this.password.value);
 }
+
+setValue(){
+  this.name.setValue('supriya');
+  this.password.setValue('2234');
+}
+
 }
