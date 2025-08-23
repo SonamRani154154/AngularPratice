@@ -1,1 +1,41 @@
-<p>template-form works!</p>
+<h1>Template driven Form </h1>
+<form #userForm="ngForm" (ngSubmit)="AddDetails(userForm.value)">
+    <input type="text" placeholder="enter your name" name="name"  #name="ngModel" ngModel required>
+    @if (name.invalid && name.touched) {
+    <span  class="error" >Name is required </span>
+    }
+  
+
+    <br><br>
+    <input type="text"  minlength="5"  maxlength="10" required="" placeholder="Password" name="password"  #password="ngModel" ngModel required>
+
+     @if (password.invalid && password.touched) {
+    <span  class="error" >please Enter Vaid Password </span>
+    }
+    <br><br>
+
+    <input type="text"  minlength="5"  maxlength="10"   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required="" placeholder="email" name="email"  #email="ngModel" ngModel required>
+
+     @if (email.invalid && email.touched) {
+    <span  class="error" >please Enter Vaid email </span>
+    }
+    <br><br>
+
+
+    <select name="gender" ngModel>
+        <option value="">select Gender </option>
+        <option value="">Male</option>
+        <option value="">Female</option>
+
+    </select>
+    <br><br>
+    <span>Range </span>
+    <br>
+    <input type="range" min="0" max="20" name="age" ng ngModel>
+    <br>
+    <button  [disabled]="userForm.invalid" >Add user </button>
+    <h2>{{userDetails?.name}}</h2>
+    <h3>{{userDetails?.password}}</h3>
+    <h2>{{userDetails?.gender}}</h2>
+    <h2>{{userDetails?.age}}</h2>
+</form>

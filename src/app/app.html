@@ -1,4 +1,15 @@
 <!-- <app-header></app-header> -->
 <!-- <app-forms></app-forms> -->
-<app-grouping-form></app-grouping-form>
+<!-- <app-grouping-form></app-grouping-form> -->
+
+<h1>Pass Data to Child component </h1>
+<app-people [user]="userName"   city="Gurugram" ></app-people>
+<select   #selectedUser   (change)="onUserChange(selectedUser.value)">
+    <option value="Supriya">Suriya </option>
+    <option value="Manish ">manish  </option>
+        <option value="Sonu">sonu</option>
+            <option value="Sam">Sam </option>
+</select>
+
+<!-- <app-template-form></app-template-form> -->
 <!-- <router-outlet></router-outlet> -->
