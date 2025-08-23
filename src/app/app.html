@@ -2,14 +2,48 @@
 <!-- <app-forms></app-forms> -->
 <!-- <app-grouping-form></app-grouping-form> -->
 
-<h1>Pass Data to Child component </h1>
+<!-- <h1>Pass Data to Child component </h1>
 <app-people [user]="userName"   city="Gurugram" ></app-people>
 <select   #selectedUser   (change)="onUserChange(selectedUser.value)">
     <option value="Supriya">Suriya </option>
     <option value="Manish ">manish  </option>
         <option value="Sonu">sonu</option>
             <option value="Sam">Sam </option>
-</select>
+</select> -->
 
 <!-- <app-template-form></app-template-form> -->
 <!-- <router-outlet></router-outlet> -->
+<!-- @for  (user of users; track user){
+<div> 
+    <app-child [user]="user" ></app-child>
+</div>
+
+
+} -->
+
+
+<!-- <h2>Pass Data Child To Parent </h2>
+<app-child-to-parent (getUsers)="handleUsers($event)" ></app-child-to-parent>
+
+
+
+@for (user of users; track user){
+<h1>{{user}}</h1>
+
+} -->
+
+
+<!-- <h4>pipes Module  In angular </h4>
+<h2>{{title|uppercase}}</h2>
+<h4>{{title |titlecase}}</h4>
+<h2>{{date| date}}</h2>
+<h2>{{date| date: 'fullDate'}}</h2>
+<h3>{{amount| currency}}</h3>
+<h4>{{amount| currency:'EUR'}}</h4>
+<h5>{{amount| currency:'INR'}}</h5> -->
+
+
+<h2>Custom Pipe Modules </h2>
+<h4>{{amount|currencyConvertor}}</h4>
+
+<h1>{{100|currencyConvertor:12}}</h1>
