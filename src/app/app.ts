@@ -9,10 +9,13 @@ import { Child } from "./child/child";
 import { ChildToParent } from "./child-to-parent/child-to-parent";
 import { CommonModule } from '@angular/common';
 import { CurrencyConvertorPipe } from './pipe/currency-convertor-pipe';
+import { UserPerson } from "./user-person/user-person";
+import { Product } from './services/product';
+import { Data } from './services/data';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Forms, GroupingForm, TemplateForm, People, Child, ChildToParent,CommonModule  , CurrencyConvertorPipe],
+  imports: [RouterOutlet, Header, Forms, GroupingForm, TemplateForm, People, Child, ChildToParent, CommonModule, CurrencyConvertorPipe, UserPerson],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -45,9 +48,41 @@ export class App {
 
 // ------------------------------------------------------------------------------------
 
-title="code step by step ";
-name="sonam "
-date =new Date();
-amount=10;
+// title="code step by step ";
+// name="sonam "
+// date =new Date();
+// amount=10;
+
+// ---------------------service ---------------------------------
+//  productData:{
+//   name:string;
+//   branch:string;
+//   price:string;
+//  }[]|undefined
+
+// constructor(private productService: Product)
+// {}
+
+// getProductData(){
+//  this.productData=this.productService.getProductData()
+// }
+
+// -------------------------------- call api with services -------------------------
+
+productlist:any
+constructor(  private productService:Data){
+
+}
+
+ngOnInit(){
+this.productService.getProductList().subscribe((data:any)=>{
+console.log(data)
+this.productlist=data.products
+
+})
+
+}
+
+
 
 }
