@@ -69,12 +69,34 @@
 
 <h1>API Call Service </h1>
 
-@for (product of productlist; track product.id) {
+<form   #userForm="ngForm"  (ngSubmit)="addUser(userForm.value)">
+    <input type="text" placeholder="name" name="name" [ngModel]="selecteduser?.name" >
+    <br><br>
+
+    <input type="text" placeholder="age" name="age" [ngModel]="selecteduser?.age"> 
+    <br><br>
+
+    <input type="text" placeholder="email" name="email"  [ngModel]="selecteduser?.email">
+    <br><br>
+    @if(!selecteduser){
+    <button>Add User </button>
+    }
+    @else {
+        <button>update user  </button>
+    }
+
+</form>
+
+@for (user of users; track user.id) {
     <ul>
-        <li>{{product.title}}</li>
-        <li>{{product.price}}</li>
-        <li>{{product.category}}</li>
-        <li>{{product.rating}}</li>
-        <li><img src="{{product.thumbnail}}" alt=""></li>
+        <li>{{user.id}}</li>
+      <li>{{user.name}}</li>
+      <li>{{user.age}}</li>
+      <li>{{user.email}}</li>
+      <li><button  (click)="deleteUser(user.id)" >delete</button></li>
+<li><button  (click)="SelectUpdateUser(user.id)" >update User Data </button></li>
+      
+
+      
     </ul>
 }

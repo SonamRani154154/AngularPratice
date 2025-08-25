@@ -12,10 +12,13 @@ import { CurrencyConvertorPipe } from './pipe/currency-convertor-pipe';
 import { UserPerson } from "./user-person/user-person";
 import { Product } from './services/product';
 import { Data } from './services/data';
+import { User } from './user/user';
+import { datatypes } from './interfaces/User';
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Forms, GroupingForm, TemplateForm, People, Child, ChildToParent, CommonModule, CurrencyConvertorPipe, UserPerson],
+  imports: [RouterOutlet, Header, Forms, GroupingForm, TemplateForm, People, Child, ChildToParent, CommonModule, CurrencyConvertorPipe, UserPerson, FormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -69,20 +72,64 @@ export class App {
 
 // -------------------------------- call api with services -------------------------
 
-productlist:any
-constructor(  private productService:Data){
+users:datatypes[]=[];
+selecteduser:datatypes|undefined
+constructor(  private DataService:Data){
 
 }
 
 ngOnInit(){
-this.productService.getProductList().subscribe((data:any)=>{
-console.log(data)
-this.productlist=data.products
+this.getuser()
+
+}
+
+
+getuser(){
+this.DataService.getUsers().subscribe((data:datatypes[])=>{
+
+this.users=data;
+console.log(this.users);
 
 })
 
 }
 
+addUser(user:datatypes){
+  if(!this.selecteduser){
 
+this.DataService.saveUsers(user).subscribe((data:datatypes)=>{
+  if(data){
+    this.getuser();
+  }
+})
+  }
+  else{
+    const userData={...user,id:this.selecteduser.id}
+    this.DataService.UpdateUser(user).subscribe((data)=>{
+      if(data){
+        this.getuser()
+      }
+    })
+  }
+
+
+
+
+}
+
+deleteUser(id:string){
+this.DataService.deleteUser(id).subscribe((data:datatypes)=>{
+    if(data){
+    this.getuser();
+  }
+})
+
+}
+
+SelectUpdateUser(id:string){
+this.DataService.getSelectedUser(id).subscribe((data:datatypes)=>{
+    this.selecteduser=data
+})
+}
 
 }
